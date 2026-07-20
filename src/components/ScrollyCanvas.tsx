@@ -9,7 +9,7 @@ const TOTAL_FRAMES = 105;
 export default function ScrollyCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [, setImagesLoaded] = useState(0);
   const [isPreloaded, setIsPreloaded] = useState(false);
   
   // Array to cache preloaded Image objects
@@ -124,8 +124,6 @@ export default function ScrollyCanvas() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isPreloaded]);
-
-  const percentLoaded = Math.min(Math.round((imagesLoaded / TOTAL_FRAMES) * 100), 100);
 
   return (
     <div ref={containerRef} className="relative h-[500vh] w-full bg-[#121212]">

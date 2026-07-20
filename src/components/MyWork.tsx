@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Folder,
@@ -266,17 +266,17 @@ export default function MyWork() {
 
   const currentItems = selectedAlbum ? selectedAlbum.items : [];
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (lightboxIndex !== null && currentItems.length > 0) {
       setLightboxIndex((prev) => (prev! === 0 ? currentItems.length - 1 : prev! - 1));
     }
-  };
+  }, [lightboxIndex, currentItems.length]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (lightboxIndex !== null && currentItems.length > 0) {
       setLightboxIndex((prev) => (prev! === currentItems.length - 1 ? 0 : prev! + 1));
     }
-  };
+  }, [lightboxIndex, currentItems.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -291,7 +291,7 @@ export default function MyWork() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, selectedAlbum, currentItems]);
+  }, [lightboxIndex, selectedAlbum, handleNext, handlePrev]);
 
   useEffect(() => {
     if (selectedAlbum) {
