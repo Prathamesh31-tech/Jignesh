@@ -27,33 +27,33 @@ export default function ScrollyCanvas() {
 
   // Load all images on mount
   useEffect(() => {
-    let loadedCount = 0;
-    const loadedImages: HTMLImageElement[] = [];
+    // Safety timeout to guarantee portfolio reveals within max 1.2s
+    const timer = setTimeout(() => {
+      setIsPreloaded(true);
+      drawFrame(0);
+    }, 1200);
 
     const handleImageLoad = () => {
       loadedCount++;
-      setImagesLoaded(loadedCount);
-      if (loadedCount === TOTAL_FRAMES) {
-        imagesRef.current = loadedImages;
-        setIsPreloaded(true);
-        // Draw initial frame
+      if (loadedCount === 1) {
         drawFrame(0);
+      }
+      if (loadedCount >= 5 || loadedCount === TOTAL_FRAMES) {
+        setIsPreloaded(true);
       }
     };
 
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
-      // Format index as 3 digits (001, 002, ..., 105)
       const frameNum = String(i).padStart(3, "0");
       img.src = `/sequence/ezgif-frame-${frameNum}.png`;
       img.onload = handleImageLoad;
-      img.onerror = () => {
-        console.error(`Error loading frame ${frameNum}`);
-        // Increment anyway so we don't block the site completely if one image fails
-        handleImageLoad();
-      };
+      img.onerror = handleImageLoad;
       loadedImages.push(img);
     }
+    imagesRef.current = loadedImages;
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Helper to draw a single frame to the canvas with "object-fit: cover"
@@ -170,7 +170,7 @@ export default function ScrollyCanvas() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#121212]/30 via-transparent to-[#121212]/30 pointer-events-none" />
 
         {/* Narrative Parallax Overlays */}
-        {isPreloaded && <Overlay scrollYProgress={scrollYProgress} />}
+        <Overlay scrollYProgress={scrollYProgress} />
       </div>
     </div>
   );
