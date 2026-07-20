@@ -305,26 +305,26 @@ export default function MyWork() {
   }, [selectedAlbum]);
 
   return (
-    <section id="my-work" className="relative w-full pt-16 pb-24 px-6 md:px-16 bg-[#0d0d0d] border-t border-white/5">
+    <section id="my-work" className="relative w-full pt-16 pb-24 px-4 sm:px-6 md:px-16 bg-[#0d0d0d] border-t border-white/5">
       {/* Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-purple-900/10 rounded-full blur-[120px] sm:blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Centered Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white uppercase mb-4 leading-tight">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight text-white uppercase mb-3 sm:mb-4 leading-tight">
             MY{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500">
               WORK
             </span>
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-gray-400 font-light whitespace-nowrap inline-block max-w-none">
+          <p className="text-xs sm:text-sm md:text-base text-gray-400 font-light max-w-2xl mx-auto px-2">
             Curated album showcase of static designs, grid layouts, moment marketing, festival campaigns &amp; UGC reels.
           </p>
         </div>
 
         {/* Albums Showcase Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {albums.map((album, idx) => (
             <motion.div
               key={album.id}
@@ -377,7 +377,7 @@ export default function MyWork() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedAlbum(null)}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6"
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
           >
             <motion.div
               initial={{ scale: 0.95, y: 20, opacity: 0 }}
@@ -385,25 +385,29 @@ export default function MyWork() {
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl max-h-[85vh] bg-[#0d0d0d] border border-white/10 rounded-2xl overflow-y-auto flex flex-col shadow-2xl"
+              className="relative w-full max-w-5xl max-h-[90vh] sm:max-h-[85vh] bg-[#0d0d0d] border border-white/10 rounded-2xl overflow-y-auto flex flex-col shadow-2xl"
             >
               {/* Ambient Background Glow */}
-              <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[140px] pointer-events-none" />
+              <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-900/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
 
               {/* Sticky Header Top Bar with ONLY CROSS (X) Close Button */}
-              <div className="sticky top-0 z-50 w-full px-6 py-4 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-white/10 flex items-center justify-end">
+              <div className="sticky top-0 z-50 w-full px-4 sm:px-6 py-3.5 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <h4 className="text-sm sm:text-base font-bold text-white tracking-tight">{selectedAlbum.title}</h4>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">{selectedAlbum.itemCount}</span>
+                </div>
                 {/* PROMINENT CROSS (X) BUTTON */}
                 <button
                   onClick={() => setSelectedAlbum(null)}
-                  className="p-2.5 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-xl hover:scale-110 active:scale-95 flex items-center justify-center gap-2 group"
+                  className="p-2 sm:p-2.5 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-xl hover:scale-110 active:scale-95 flex items-center justify-center gap-2 group"
                   title="Close Album (Esc)"
                 >
-                  <X className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
               </div>
 
               {/* Modal Content Area: Only Images and Videos Grid */}
-              <div className="w-full px-6 md:px-8 py-8 space-y-12 relative z-10">
+              <div className="w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8 sm:space-y-12 relative z-10">
                 {/* 1. PHOTO ALBUM SCRAPBOOK SECTION */}
                 {selectedAlbum.items.filter((i) => i.type === "image").length > 0 && (
                   <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
@@ -432,7 +436,7 @@ export default function MyWork() {
 
                 {/* 2. INSTAGRAM SHORT-FORM REELS SECTION */}
                 {selectedAlbum.items.filter((i) => i.type === "video").length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                     {selectedAlbum.items
                       .filter((i) => i.type === "video")
                       .map((reel) => {
@@ -441,7 +445,7 @@ export default function MyWork() {
                           <div
                             key={reel.id}
                             onClick={() => setLightboxIndex(itemIdx)}
-                            className="group relative rounded-2xl overflow-hidden glass-card border border-white/10 cursor-pointer hover:border-pink-500/60 transition-all duration-500 shadow-2xl"
+                            className="group relative rounded-2xl overflow-hidden glass-card border border-white/10 cursor-pointer hover:border-pink-500/60 transition-all duration-500 shadow-2xl max-w-xs sm:max-w-none mx-auto w-full"
                           >
                             <div className="relative aspect-[9/16] w-full bg-black overflow-hidden">
                               <img
@@ -477,14 +481,14 @@ export default function MyWork() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightboxIndex(null)}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl cursor-pointer"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 bg-black/95 backdrop-blur-2xl cursor-pointer"
           >
             <button
               onClick={() => setLightboxIndex(null)}
-              className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 p-2.5 sm:p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"
               title="Close Preview (Esc)"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
 
             {/* PREVIOUS BUTTON (<) */}
@@ -493,10 +497,10 @@ export default function MyWork() {
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-2xl hover:scale-110 active:scale-95"
+              className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-2.5 sm:p-4 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-2xl hover:scale-110 active:scale-95"
               title="Previous Item (Left Arrow)"
             >
-              <ChevronLeft className="h-8 w-8" />
+              <ChevronLeft className="h-5 w-5 sm:h-8 sm:w-8" />
             </button>
 
             {/* NEXT BUTTON (>) */}
@@ -505,33 +509,31 @@ export default function MyWork() {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-2xl hover:scale-110 active:scale-95"
+              className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-2.5 sm:p-4 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 transition-all shadow-2xl hover:scale-110 active:scale-95"
               title="Next Item (Right Arrow)"
             >
-              <ChevronRight className="h-8 w-8" />
+              <ChevronRight className="h-5 w-5 sm:h-8 sm:w-8" />
             </button>
 
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-3xl w-full flex flex-col items-center cursor-default px-12"
+              className="relative max-w-3xl w-full flex flex-col items-center cursor-default px-2 sm:px-12"
             >
-              <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black mb-4 flex items-center justify-center min-h-[350px]">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black mb-4 flex items-center justify-center min-h-[280px] sm:min-h-[350px]">
                 <img
                   src={currentItems[lightboxIndex].src}
                   alt={currentItems[lightboxIndex].title}
-                  className="w-full max-h-[65vh] object-contain"
+                  className="w-full max-h-[70vh] sm:max-h-[65vh] object-contain"
                 />
 
                 {currentItems[lightboxIndex].type === "video" && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none">
-                    <div className="p-4 rounded-full bg-pink-600/90 text-white shadow-[0_0_30px_rgba(236,72,153,0.6)]">
-                      <Play className="h-8 w-8 fill-white translate-x-0.5" />
+                    <div className="p-3 sm:p-4 rounded-full bg-pink-600/90 text-white shadow-[0_0_30px_rgba(236,72,153,0.6)]">
+                      <Play className="h-6 w-6 sm:h-8 sm:w-8 fill-white translate-x-0.5" />
                     </div>
                   </div>
                 )}
               </div>
-
-              {/* No text content inside lightbox */}
             </div>
           </motion.div>
         )}

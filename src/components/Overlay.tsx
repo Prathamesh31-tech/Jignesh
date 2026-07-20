@@ -99,31 +99,31 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
             x: current.position === "left" ? -40 : current.position === "right" ? 40 : 0,
           }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className={`absolute inset-0 flex flex-col justify-center pt-16 px-4 md:px-12 w-full ${
+          className={`absolute inset-0 flex flex-col justify-center pt-16 sm:pt-20 pb-8 px-4 sm:px-8 md:px-16 w-full ${
             current.position === "center"
               ? "items-center text-center max-w-7xl mx-auto"
               : current.position === "left"
-              ? "items-start text-left max-w-3xl"
-              : "items-end text-right ml-auto max-w-3xl"
+              ? "items-center text-center max-w-xl mx-auto md:items-start md:text-left md:max-w-xl md:mx-0 md:ml-8 lg:ml-20"
+              : "items-center text-center max-w-xl mx-auto md:items-end md:text-right md:max-w-xl md:mx-0 md:ml-auto md:mr-8 lg:mr-20"
           }`}
         >
-          {/* Badge */}
+          {/* Badge / Subheading above title */}
           {current.badgeColor === "purple" ? (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[11px] font-mono tracking-wider mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[9px] sm:text-[11px] font-mono tracking-wider mb-2.5 sm:mb-4 max-w-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping shrink-0" />
               <span>{current.badge}</span>
             </div>
           ) : current.badgeColor === "pink" ? (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-[11px] font-mono tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-[9px] sm:text-[11px] font-mono tracking-wider mb-2.5 sm:mb-4 max-w-full">
               <span>{current.badge}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-ping" />
+              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-ping shrink-0" />
             </div>
           ) : current.id === 3 ? (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[11px] font-mono tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[9px] sm:text-[11px] font-mono tracking-wider mb-2.5 sm:mb-4 max-w-full">
               <span>{current.badge}</span>
             </div>
           ) : (
-            <span className="text-xs uppercase tracking-[0.4em] text-purple-400 font-semibold mb-4 block">
+            <span className="text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.35em] text-purple-400 font-semibold mb-2 sm:mb-4 block max-w-xs sm:max-w-none text-center leading-normal">
               {current.badge}
             </span>
           )}
@@ -131,19 +131,19 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
           {/* Main Heading */}
           {current.isSingleLine ? (
             <h1
-              className={`flex flex-row flex-nowrap items-center justify-center gap-2 md:gap-4 font-black tracking-tight text-white mb-6 uppercase text-glow whitespace-nowrap leading-none shrink-0 max-w-full overflow-hidden ${
+              className={`flex flex-row whitespace-nowrap items-center justify-center gap-2 sm:gap-3 md:gap-4 font-black tracking-tight text-white mb-3 sm:mb-6 uppercase text-glow leading-none w-full max-w-full overflow-hidden ${
                 current.id === 3
-                  ? "text-[clamp(1.0rem,2.8vw,3.2rem)]"
-                  : "text-[clamp(1.5rem,4.2vw,4.8rem)]"
+                  ? "text-[clamp(1.1rem,4vw,3.2rem)]"
+                  : "text-[clamp(1.4rem,7vw,4.8rem)]"
               }`}
             >
-              <span className="whitespace-nowrap shrink-0">{current.titleLine1}</span>
-              <span className="whitespace-nowrap shrink-0 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500">
+              <span className="whitespace-nowrap">{current.titleLine1}</span>
+              <span className="whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500">
                 {current.titleGradient}
               </span>
             </h1>
           ) : (
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight uppercase mb-6 text-glow">
+            <h2 className="text-xl sm:text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight uppercase mb-3 sm:mb-6 text-glow">
               {current.titleLine1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500">
                 {current.titleGradient}
@@ -153,8 +153,8 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
 
           {/* Subtitle / Description */}
           <p
-            className={`text-sm md:text-base text-gray-400 leading-relaxed font-light ${
-              current.position === "center" ? "max-w-lg mx-auto text-xs md:text-sm uppercase tracking-[0.2em]" : "max-w-md"
+            className={`text-xs sm:text-sm md:text-base text-gray-300 font-light leading-relaxed max-w-full ${
+              current.position === "center" ? "max-w-xl mx-auto text-xs md:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em]" : "max-w-md"
             }`}
           >
             {current.description}

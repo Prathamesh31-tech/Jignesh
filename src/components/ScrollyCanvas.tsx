@@ -136,52 +136,24 @@ export default function ScrollyCanvas() {
             key="loader"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#121212]"
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#121212] px-4"
           >
-            <div className="relative flex flex-col items-center">
-              {/* Outer pulsing neon ring */}
+            <div className="relative flex flex-col items-center justify-center text-center w-full max-w-full">
+              {/* Central text display - Single line responsive Welcome text */}
               <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute h-36 w-36 rounded-full border border-purple-500/20 blur-md"
-              />
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute h-32 w-32 rounded-full border border-purple-500/40"
-              />
+                initial={{ scale: 0.96, opacity: 0.7 }}
+                animate={{ scale: [0.97, 1.02, 0.97], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                className="z-10 flex items-center justify-center w-full"
+              >
+                <h2 className="text-[clamp(1.05rem,4.5vw,3rem)] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 uppercase whitespace-nowrap text-glow px-2 text-center">
+                  WELCOME TO MY PORTFOLIO
+                </h2>
+              </motion.div>
               
-              {/* Central text display */}
-              <div className="z-10 flex flex-col items-center">
-                <span className="font-mono text-xs tracking-[0.25em] text-purple-400 uppercase mb-2">Preloading Canvas</span>
-                <span className="text-4xl font-extrabold tracking-tighter text-white font-sans text-glow">
-                  {percentLoaded}%
-                </span>
-              </div>
-            </div>
-            
-            {/* Elegant tiny status bar */}
-            <div className="mt-8 w-48 h-[1px] bg-white/10 overflow-hidden relative rounded-full">
-              <motion.div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-indigo-500"
-                style={{ width: `${percentLoaded}%` }}
-                transition={{ duration: 0.1 }}
-              />
+              {/* Sleek horizontal glowing bar */}
+              <div className="mt-4 w-28 sm:w-44 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent rounded-full animate-pulse" />
             </div>
           </motion.div>
         )}
