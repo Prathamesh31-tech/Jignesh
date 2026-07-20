@@ -34,7 +34,7 @@ export default function Experience() {
     {
       id: "creaators-hub",
       company: "Creaators Hub",
-      role: "Social Media Marketing Manager",
+      role: "Junior Social Media Marketing Manager",
       duration: "May 2026 - Present",
       badge: "CONTENT & ANALYTICS MANAGER",
       gradient: "from-pink-600/20 via-pink-600/5 to-transparent",
