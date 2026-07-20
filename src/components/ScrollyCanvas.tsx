@@ -9,7 +9,6 @@ const TOTAL_FRAMES = 105;
 export default function ScrollyCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [, setImagesLoaded] = useState(0);
   const [isPreloaded, setIsPreloaded] = useState(false);
   
   // Array to cache preloaded Image objects
@@ -27,18 +26,11 @@ export default function ScrollyCanvas() {
 
   // Load all images on mount
   useEffect(() => {
-    // Safety timeout to guarantee portfolio reveals within max 1.2s
-    const timer = setTimeout(() => {
-      setIsPreloaded(true);
-      drawFrame(0);
-    }, 1200);
+    const loadedImages: HTMLImageElement[] = [];
 
-    const handleImageLoad = () => {
-      loadedCount++;
-      if (loadedCount === 1) {
-        drawFrame(0);
-      }
-      if (loadedCount >= 5 || loadedCount === TOTAL_FRAMES) {
+    const handleImageLoad = (index: number) => {
+      if (index === 0) {
+        requestAnimationFrame(() => drawFrame(0));
         setIsPreloaded(true);
       }
     };
@@ -47,11 +39,18 @@ export default function ScrollyCanvas() {
       const img = new Image();
       const frameNum = String(i).padStart(3, "0");
       img.src = `/sequence/ezgif-frame-${frameNum}.png`;
-      img.onload = handleImageLoad;
-      img.onerror = handleImageLoad;
+      const idx = i - 1;
+      img.onload = () => handleImageLoad(idx);
+      img.onerror = () => handleImageLoad(idx);
       loadedImages.push(img);
     }
     imagesRef.current = loadedImages;
+
+    // Safety fallback: reveal portfolio within max 400ms
+    const timer = setTimeout(() => {
+      setIsPreloaded(true);
+      drawFrame(0);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, []);
@@ -59,13 +58,13 @@ export default function ScrollyCanvas() {
   // Helper to draw a single frame to the canvas with "object-fit: cover"
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
-    if (!canvas || imagesRef.current.length < TOTAL_FRAMES) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const img = imagesRef.current[index];
-    if (!img) return;
+    if (!img || !img.complete || img.naturalWidth === 0) return;
 
     // Set canvas dimensions based on client size and device pixel ratio for maximum crispness
     const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
