@@ -20,7 +20,7 @@ export default function Experience() {
       id: "break-the-code",
       company: "Break The Code",
       role: "Social Media Marketing Intern",
-      duration: "October 2025 - Present",
+      duration: "October 2025 - April 2026",
       badge: "20+ BRANDS MANAGED",
       gradient: "from-purple-600/20 via-purple-600/5 to-transparent",
       points: [
@@ -34,7 +34,7 @@ export default function Experience() {
     {
       id: "creaators-hub",
       company: "Creaators Hub",
-      role: "Junior Social Media Marketing Manager",
+      role: "Social Media Marketing Manager",
       duration: "May 2026 - Present",
       badge: "CONTENT & ANALYTICS MANAGER",
       gradient: "from-pink-600/20 via-pink-600/5 to-transparent",

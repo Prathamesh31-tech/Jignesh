@@ -350,7 +350,7 @@ export default function MyWork() {
       id: "ugc-reels-content",
       title: "UGC & Video Reels",
       subtitle: "High-converting user-generated video content, 9:16 mobile reels, and scripted brand stories.",
-      coverImage: "https://res.cloudinary.com/ddfwegroq/image/upload/v1781525528/crave_co_trend_post.jpg_tklgbe.jpg",
+      coverImage: "https://images.pexels.com/photos/5052877/pexels-photo-5052877.jpeg",
       itemCount: "4 Video Reels",
       tags: ["UGC Videos", "Short Reels", "Voiceover"],
       items: [
